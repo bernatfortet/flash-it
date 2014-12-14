@@ -1,0 +1,54 @@
+head
+	title Flash It
+
+body
+
+	.shell
+		+loginButtons
+
+
+		if currentUser
+			+add_problem
+			
+			.problems-list
+				each problems
+
+					+problem
+
+
+	.charts
+		svg.chart
+		
+
+
+
+template(name="add_problem")
+	.add-problem
+		.grades-list
+			.grade(grade='1') V1
+			.grade(grade='2') V2
+			.grade(grade='3') V3
+			.grade(grade='4') V4
+			.grade(grade='5') V5
+			.grade(grade='6') V6
+			.grade(grade='7') V7
+			.grade(grade='8') V8
+			.grade(grade='9') V9
+			.grade(grade='10') V10
+			.grade(grade='11') V11
+			.grade(grade='12') V12
+			.grade(grade='13') V13
+			.grade(grade='14') V14
+			.grade(grade='15') V15
+		.modes
+			.flash.mode
+			.redpoint.mode
+
+template(name="problem")
+	.problem
+		span {{grade}} -
+		if flashed
+			span.flash-icon (F) - 
+		span {{date}} 
+		button.delete &times;
+
