@@ -1,12 +1,12 @@
 Meteor.subscribe("problems");
 Meteor.subscribe("userStats");
+Meteor.subscribe("friends", Meteor.userId());
 Session.setDefault("counter", 0);
-
 
 Meteor.startup(function () {
 
 	setTimeout( function(){
-		setChart();
+		//setChart();
 	}, 1000)
 	
 
@@ -85,18 +85,29 @@ Template.problem.helpers({
 Template.body.helpers({
 	problems: function () {
 		return Problems.find({}, {sort: {createdAt: -1}});
+	},
+	flashes: function () {
+		return Problems.find({}, {sort: {createdAt: -1}});
 	}
 });
 
+
+Template.body.helpers({
+	friends: function () {
+		return Meteor.users.find({ _id: {$not: Meteor.userId()} }, {sort: {createdAt: -1}});
+	}
+});
 
 Template.problem.events({
 	"click .delete": function() {
 		Meteor.call("deleteProblem", this._id);
 	}
 });
-
-
 Accounts.ui.config({
+	requestPermissions: {
+		facebook: ['user_friends']
+	},
 	passwordSignupFields: "USERNAME_ONLY"
 });
+
 

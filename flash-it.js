@@ -62,6 +62,21 @@ Meteor.methods({
 
 	deleteProblem: function (problemId) {
 		Problems.remove(problemId);
+	},
+	onUserLogin: function(){
+
+		console.log( 'asdf', Meteor.userId()  )
+		/*
+		Meteor.http.get("https://graph.facebook.com/me",
+			{ params: {
+				access_token:  Meteor.user().services.facebook.accessToken,
+				fields: 'friends'
+			}},
+			function (error, result){
+				console.log(error);
+				console.log('result', result.data);
+			}
+		);*/
 	}
 });
 
